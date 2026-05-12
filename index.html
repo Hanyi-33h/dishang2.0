@@ -1,0 +1,461 @@
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --brand:#6B8FA8;--navy:#1C2B3A;--cream:#F8F6F3;--white:#FFFFFF;
+  --gold:#B8976A;--text:#1E1E1E;--muted:#777;--border:#E0DDD9;
+}
+html{scroll-behavior:smooth;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;color:var(--text);background:var(--white);overflow-x:hidden;}
+
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:999;height:66px;background:rgba(255,255,255,0.97);border-bottom:0.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 60px;transition:box-shadow .3s;}
+.nl{display:flex;flex-direction:column;gap:2px;cursor:default;}
+.nl-main{font-family:Georgia,serif;font-size:20px;font-weight:400;letter-spacing:6px;color:var(--navy);}
+.nl-sub{font-size:8px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;}
+.nlinks{display:flex;gap:36px;list-style:none;}
+.nlinks a{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--text);text-decoration:none;padding-bottom:3px;position:relative;transition:color .2s;}
+.nlinks a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--gold);transition:width .3s;}
+.nlinks a:hover{color:var(--brand);}
+.nlinks a:hover::after{width:100%;}
+
+/* HERO */
+#hero{height:100vh;min-height:580px;background:var(--brand);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding-top:66px;}
+.h-wm{position:absolute;font-family:Georgia,serif;font-size:32vw;font-weight:700;color:rgba(255,255,255,0.055);letter-spacing:-1vw;user-select:none;pointer-events:none;white-space:nowrap;}
+.h-content{text-align:center;color:#fff;position:relative;z-index:2;padding:0 40px;}
+.h-eye{font-size:10px;letter-spacing:7px;opacity:.7;text-transform:uppercase;margin-bottom:28px;}
+.h-cn{font-family:Georgia,serif;font-size:clamp(28px,4.5vw,62px);font-weight:400;letter-spacing:10px;margin-bottom:16px;line-height:1.3;}
+.h-en{font-size:clamp(15px,2vw,26px);font-weight:300;letter-spacing:8px;opacity:.85;margin-bottom:36px;}
+.h-line{width:60px;height:1px;background:rgba(255,255,255,.4);margin:0 auto 36px;}
+.h-tag{font-size:12px;letter-spacing:2px;opacity:.65;font-weight:300;line-height:2;}
+.h-scroll{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;color:rgba(255,255,255,.5);font-size:9px;letter-spacing:4px;text-transform:uppercase;}
+.h-bar{width:1px;height:44px;background:rgba(255,255,255,.4);animation:sbar 2s ease-in-out infinite;}
+@keyframes sbar{0%{opacity:0;transform:scaleY(0);transform-origin:top}50%{opacity:1;transform:scaleY(1);transform-origin:top}100%{opacity:0;transform:scaleY(1);transform-origin:bottom}}
+
+/* SECTIONS */
+.sec{padding:96px 60px;}
+.sec.cream{background:var(--cream);}
+.sec.white{background:var(--white);}
+.sh{text-align:center;margin-bottom:64px;}
+.slabel{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--brand);font-weight:500;margin-bottom:14px;}
+.stcn{font-family:Georgia,serif;font-size:clamp(24px,3.2vw,44px);font-weight:400;color:var(--navy);letter-spacing:4px;margin-bottom:10px;}
+.sten{font-family:Georgia,serif;font-size:clamp(13px,1.5vw,20px);font-weight:400;color:var(--muted);letter-spacing:5px;font-style:italic;margin-top:8px;}
+.dv{display:flex;align-items:center;gap:16px;margin:22px auto 0;max-width:480px;}
+.dvl{flex:1;height:.5px;background:var(--border);}
+.dvd{width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0;}
+
+/* ABOUT */
+.about-in{max-width:820px;margin:0 auto;}
+.acn{font-size:15px;line-height:2.2;color:var(--text);margin-bottom:22px;}
+.aen{font-size:14px;line-height:2;color:var(--muted);font-weight:300;margin-bottom:14px;}
+
+/* STATS */
+.stats-band{background:var(--cream);border-top:.5px solid var(--border);border-bottom:.5px solid var(--border);padding:56px 60px;}
+.sgrid{display:grid;grid-template-columns:repeat(4,1fr);max-width:1100px;margin:0 auto;border:.5px solid var(--border);}
+.si{padding:44px 24px;text-align:center;border-right:.5px solid var(--border);background:var(--white);}
+.si:last-child{border-right:none;}
+.snum{font-family:Georgia,serif;font-size:48px;font-weight:400;color:var(--navy);line-height:1;margin-bottom:10px;}
+.snum sup{font-size:18px;color:var(--gold);vertical-align:top;line-height:1.6;}
+.scn{font-size:12px;color:var(--muted);letter-spacing:2px;margin-bottom:3px;}
+.sen{font-size:9px;color:#bbb;letter-spacing:2px;font-weight:300;}
+
+/* PRODUCTS */
+.pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;max-width:1200px;margin:0 auto;}
+.pc{cursor:default;}
+.pimg-wrap{width:100%;aspect-ratio:3/4;overflow:hidden;background:#f5f3f0;position:relative;}
+.pimg-wrap img{width:100%;height:100%;object-fit:contain;padding:18px;transition:transform .5s;}
+.pc:hover .pimg-wrap img{transform:scale(1.04);}
+.pinfo{padding:16px 4px 0;}
+.pcn{font-family:Georgia,serif;font-size:18px;font-weight:400;color:var(--navy);letter-spacing:3px;margin-bottom:5px;}
+.pen{font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;}
+
+/* WORKSHOPS */
+.wgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:3px;max-width:1200px;margin:0 auto;}
+.wi{position:relative;aspect-ratio:16/9;overflow:hidden;cursor:default;}
+.wi img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .5s;}
+.wi:hover img{transform:scale(1.03);}
+.wlbl{position:absolute;bottom:0;left:0;right:0;padding:22px 26px;background:linear-gradient(to top,rgba(20,35,48,.78) 0%,transparent 100%);}
+.wcn{font-family:Georgia,serif;font-size:20px;color:#fff;letter-spacing:4px;margin-bottom:5px;}
+.wen{font-size:9px;color:rgba(255,255,255,.82);letter-spacing:4px;text-transform:uppercase;}
+
+/* OVERSEAS PRODUCTION */
+.ovs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;max-width:1200px;margin:0 auto;}
+.ovs-block{position:relative;aspect-ratio:4/3;overflow:hidden;cursor:default;}
+.ovs-block img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .5s;}
+.ovs-block:hover img{transform:scale(1.04);}
+.ovs-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(20,35,48,.78) 0%,rgba(20,35,48,.1) 55%,transparent 100%);display:flex;align-items:flex-end;padding:30px 30px;}
+.ovs-info{color:#fff;}
+.ovs-cn{font-family:Georgia,serif;font-size:30px;letter-spacing:6px;margin-bottom:7px;}
+.ovs-en{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:14px;}
+.ovs-tag{display:inline-block;font-size:10px;letter-spacing:1.5px;color:rgba(255,255,255,.82);border:.5px solid rgba(255,255,255,.38);padding:6px 16px;}
+
+/* OVERSEAS DESIGN */
+.dgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;max-width:1200px;margin:0 auto;}
+.dcard{position:relative;aspect-ratio:4/3;overflow:hidden;cursor:default;}
+.dcard img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .5s;}
+.dcard:hover img{transform:scale(1.04);}
+.d-overlay{position:absolute;bottom:0;left:0;right:0;padding:24px 28px;background:linear-gradient(to top,rgba(20,35,48,.75) 0%,transparent 100%);}
+.ddcn{font-family:Georgia,serif;font-size:28px;color:#fff;letter-spacing:5px;margin-bottom:5px;}
+.dden{font-size:10px;letter-spacing:4px;color:rgba(255,255,255,.72);text-transform:uppercase;}
+
+/* CERTIFICATIONS */
+.cgrid{display:flex;flex-wrap:wrap;justify-content:center;gap:30px;max-width:900px;margin:0 auto;}
+.ci{display:flex;flex-direction:column;align-items:center;gap:14px;width:130px;}
+.cc{width:96px;height:96px;border-radius:50%;border:1px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--white);cursor:default;transition:all .3s;gap:2px;}
+.cc:hover{border-color:var(--navy);background:var(--navy);}
+.cc:hover .ca,.cc:hover .cs{color:#fff!important;}
+.ca{font-size:13px;font-weight:500;color:var(--navy);letter-spacing:1px;transition:color .3s;line-height:1;}
+.cs{font-family:Georgia,serif;font-size:19px;font-weight:400;color:var(--navy);transition:color .3s;line-height:1.15;}
+.cn2{font-size:11px;color:var(--muted);text-align:center;line-height:1.7;letter-spacing:.3px;}
+
+/* PARTNERS */
+.pgrid2{display:flex;flex-wrap:wrap;justify-content:center;gap:13px;max-width:1100px;margin:0 auto;}
+.pcircle{width:138px;height:138px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;padding:16px;cursor:default;transition:all .3s;background:var(--white);}
+.pcircle:hover{border-color:var(--navy);background:var(--navy);}
+.pcircle:hover .pn{color:#fff;}
+.pn{font-family:Georgia,serif;font-size:13px;font-weight:400;color:var(--navy);text-align:center;letter-spacing:.5px;line-height:1.45;transition:color .3s;}
+.pdark{background:var(--navy);border-color:var(--navy);}
+.pdark .pn{color:#fff;}
+.pdark:hover{background:var(--brand);}
+.pred{background:#9b1c1c;border-color:#9b1c1c;}
+.pred .pn{color:#fff;}
+.pmm{border-color:#9b1c1c;}
+.pmm .pn{color:#9b1c1c;}
+.pmm:hover{background:#9b1c1c;}
+.pmm:hover .pn{color:#fff;}
+.pblue{background:#1a3a6b;border-color:#1a3a6b;}
+.pblue .pn{color:#fff;}
+.pblue:hover{background:var(--brand);border-color:var(--brand);}
+
+/* FOOTER */
+footer{background:var(--navy);padding:80px 60px 40px;}
+.ftop{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:60px;margin-bottom:60px;}
+.flogo{font-family:Georgia,serif;font-size:26px;font-weight:400;color:#fff;letter-spacing:6px;margin-bottom:6px;}
+.flogocn{font-size:12px;color:rgba(255,255,255,.45);letter-spacing:3px;margin-bottom:22px;}
+.fbrand p{font-size:12px;line-height:1.9;color:rgba(255,255,255,.4);max-width:280px;}
+.fcol h4{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:#fff;margin-bottom:22px;font-weight:500;}
+.fcol ul{list-style:none;}
+.fcol li{font-size:12px;color:rgba(255,255,255,.4);margin-bottom:10px;cursor:default;transition:color .2s;}
+.fcol li:hover{color:rgba(255,255,255,.8);}
+.fhr{height:.5px;background:rgba(255,255,255,.1);margin-bottom:28px;}
+.fbot{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:rgba(255,255,255,.28);}
+.fgold{color:var(--gold);font-size:11px;letter-spacing:3px;}
+
+/* ANIMATIONS */
+.fi{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease;}
+.fi.in{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.08s;}.d2{transition-delay:.18s;}.d3{transition-delay:.28s;}.d4{transition-delay:.38s;}
+
+@media(max-width:880px){
+  #nav{padding:0 20px;}
+  .nlinks{display:none;}
+  .sec{padding:64px 20px;}
+  .stats-band{padding:40px 20px;}
+  .sgrid{grid-template-columns:repeat(2,1fr);}
+  .pgrid,.wgrid,.ovs-grid,.dgrid{grid-template-columns:repeat(2,1fr);}
+  .ftop{grid-template-columns:1fr;gap:36px;}
+  .fbot{flex-direction:column;gap:10px;text-align:center;}
+}
+</style>
+
+<nav id="nav">
+  <div class="nl">
+    <span class="nl-main">DISHANG</span>
+    <span class="nl-sub">Huasheng Fashion</span>
+  </div>
+  <ul class="nlinks">
+    <li><a href="#about">公司简介</a></li>
+    <li><a href="#products">产品系列</a></li>
+    <li><a href="#workshops">生产车间</a></li>
+    <li><a href="#global">全球布局</a></li>
+    <li><a href="#certifications">国际认证</a></li>
+    <li><a href="#partners">合作伙伴</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="h-wm">DS</div>
+  <div class="h-content fi">
+    <p class="h-eye">Dalian · China · Dishang Group</p>
+    <h1 class="h-cn">大连迪尚華盛時裝</h1>
+    <h2 class="h-en">DISHANG HUASHENG</h2>
+    <div class="h-line"></div>
+    <p class="h-tag">高端时装制造的卓越典范<br>Premium Garment Solutions · Global Clients</p>
+  </div>
+  <div class="h-scroll"><div class="h-bar"></div>Scroll</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="sec white">
+  <div class="sh fi">
+    <p class="slabel">Company Profile</p>
+    <h2 class="stcn">公司简介</h2>
+    <div class="dv"><div class="dvl"></div><div class="dvd"></div><div class="dvl"></div></div>
+  </div>
+  <div class="about-in">
+    <p class="acn fi d1">作为迪尚集团旗下高端时装制造板块的核心企业，大连迪尚华盛时装有限公司注册资本1.2亿元人民币，厂区占地约15000平方米，拥有12000平方米现代化生产车间，核心团队与一线员工共600余人，年产能40万件。</p>
+    <p class="acn fi d2">公司聚焦高端时装，尤其是双面呢大衣、风衣、西服及羽绒服等品类的精细化生产，以服装加工制造为核心，联动进出口贸易业务，构建了集研发、生产、贸易于一体的全流程服务体系，为全球客户提供高品质服装解决方案。</p>
+    <p class="aen fi d3">A core high-end fashion manufacturer under Dishang Group, Dalian Dishang Huasheng Fashion Co., Ltd. has RMB 120 million in registered capital. Our plant spans ~15,000 sqm, with 12,000 sqm of modern workshops, a team of over 600 employees, and an annual capacity of 400,000 pieces.</p>
+    <p class="aen fi d4">Specializing in high-end fashion — double-faced wool coats, trenchcoats, suits and down jackets — we integrate garment manufacturing with import/export trade. With a full R&amp;D-production-trade service system, we deliver premium garment solutions to global clients.</p>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-band fi">
+  <div class="sgrid">
+    <div class="si fi d1"><div class="snum">1.2<sup>亿</sup></div><div class="scn">注册资本（元）</div><div class="sen">Registered Capital</div></div>
+    <div class="si fi d2"><div class="snum">15,000<sup>㎡</sup></div><div class="scn">厂区占地面积</div><div class="sen">Plant Area</div></div>
+    <div class="si fi d3"><div class="snum">600<sup>+</sup></div><div class="scn">核心团队与员工</div><div class="sen">Employees</div></div>
+    <div class="si fi d4"><div class="snum">40<sup>万件</sup></div><div class="scn">年产能</div><div class="sen">Annual Capacity</div></div>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<section id="products" class="sec cream">
+  <div class="sh fi">
+    <p class="slabel">Our Products</p>
+    <h2 class="stcn">产品系列</h2>
+    <div class="dv"><div class="dvl"></div><div class="dvd"></div><div class="dvl"></div></div>
+  </div>
+  <div class="pgrid">
+    <div class="pc fi d1">
+      <div class="pimg-wrap">
+        <img src="https://i.ibb.co/Z1R9WVBm/image.jpg" alt="西服 Suit"/>
+      </div>
+      <div class="pinfo"><div class="pcn">西服</div><div class="pen">Suit / Blazer</div></div>
+    </div>
+    <div class="pc fi d2">
+      <div class="pimg-wrap">
+        <img src="https://i.ibb.co/spy5Xnq1/image.jpg" alt="双面呢大衣 Wool Coat"/>
+      </div>
+      <div class="pinfo"><div class="pcn">双面呢大衣</div><div class="pen">Double-Faced Wool Coat</div></div>
+    </div>
+    <div class="pc fi d3">
+      <div class="pimg-wrap">
+        <img src="https://i.ibb.co/2Yqr1sHS/image.jpg" alt="风衣 Trench Coat"/>
+      </div>
+      <div class="pinfo"><div class="pcn">风衣</div><div class="pen">Trench Coat</div></div>
+    </div>
+    <div class="pc fi d4">
+      <div class="pimg-wrap">
+        <img src="https://i.ibb.co/yc23866v/1.jpg" alt="羽绒服 Down Jacket"/>
+      </div>
+      <div class="pinfo"><div class="pcn">羽绒服</div><div class="pen">Down Jacket</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WORKSHOPS -->
+<section id="workshops" class="sec white">
+  <div class="sh fi">
+    <p class="slabel">Manufacturing Excellence</p>
+    <h2 class="stcn">生产车间</h2>
+    <div class="dv"><div class="dvl"></div><div class="dvd"></div><div class="dvl"></div></div>
+  </div>
+  <div class="wgrid">
+    <div class="wi fi d1">
+      <img src="https://i.ibb.co/kgMDsVPQ/image.png" alt="缝制车间"/>
+      <div class="wlbl"><div class="wcn">縫製車間</div><div class="wen">SEWING WORKSHOP</div></div>
+    </div>
+    <div class="wi fi d2">
+      <img src="https://i.ibb.co/m1YCN2w/image.png" alt="模版车间"/>
+      <div class="wlbl"><div class="wcn">模板車間</div><div class="wen">MOULDING WORKSHOP</div></div>
+    </div>
+    <div class="wi fi d3">
+      <img src="https://i.ibb.co/KxWV3q8k/image.png" alt="整熨车间"/>
+      <div class="wlbl"><div class="wcn">整熨車間</div><div class="wen">IRONING WORKSHOP</div></div>
+    </div>
+    <div class="wi fi d4">
+      <img src="https://i.ibb.co/Y44q49kN/image.png" alt="包装车间"/>
+      <div class="wlbl"><div class="wcn">包裝車間</div><div class="wen">PACKAGING WORKSHOP</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- OVERSEAS PRODUCTION -->
+<section id="global" class="sec cream">
+  <div class="sh fi">
+    <p class="slabel">Global Manufacturing</p>
+    <h2 class="stcn">海外生产基地</h2>
+    <h3 class="sten">Overseas Factory</h3>
+    <div class="dv"><div class="dvl"></div><div class="dvd"></div><div class="dvl"></div></div>
+  </div>
+  <div class="ovs-grid">
+    <div class="ovs-block fi d1">
+      <img src="https://i.ibb.co/tpsdFSQY/image.png" alt="缅甸工厂"/>
+      <div class="ovs-overlay">
+        <div class="ovs-info">
+          <div class="ovs-cn">缅甸</div>
+          <div class="ovs-en">Myanmar</div>
+          <div class="ovs-tag">仰光工业园 · 迪尚凯尼</div>
+        </div>
+      </div>
+    </div>
+    <div class="ovs-block fi d2">
+      <img src="https://i.ibb.co/21dd1rWy/image.png" alt="孟加拉国工厂"/>
+      <div class="ovs-overlay">
+        <div class="ovs-info">
+          <div class="ovs-cn">孟加拉国</div>
+          <div class="ovs-en">Bangladesh</div>
+          <div class="ovs-tag">ACE APPAREL · 锦鸿</div>
+        </div>
+      </div>
+    </div>
+    <div class="ovs-block fi d3">
+      <img src="https://i.ibb.co/Zz4gwm2p/image.png" alt="柬埔寨工厂"/>
+      <div class="ovs-overlay">
+        <div class="ovs-info">
+          <div class="ovs-cn">柬埔寨</div>
+          <div class="ovs-en">Cambodia</div>
+          <div class="ovs-tag">华宽 · 迪尚瑞华盛</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OVERSEAS DESIGN -->
+<section id="design" class="sec white">
+  <div class="sh fi">
+    <p class="slabel">Creative Network</p>
+    <h2 class="stcn">海外设计公司</h2>
+    <h3 class="sten">Our Overseas Design Company</h3>
+    <div class="dv"><div class="dvl"></div><div class="dvd"></div><div class="dvl"></div></div>
+  </div>
+  <div class="dgrid">
+    <div class="dcard fi d1">
+      <img src="https://i.ibb.co/RTMhKByW/image.png" alt="英国设计公司"/>
+      <div class="d-overlay"><div class="ddcn">英国</div><div class="dden">United Kingdom</div></div>
+    </div>
+    <div class="dcard fi d2">
+      <img src="https://i.ibb.co/35bRKVNR/image.png" alt="西班牙设计公司"/>
+      <div class="d-overlay"><div class="ddcn">西班牙</div><div class="dden">Spain</div></div>
+    </div>
+    <div class="dcard fi d3">
+      <img src="https://i.ibb.co/6K3KVt3/image.png" alt="加拿大设计公司"/>
+      <div class="d-overlay"><div class="ddcn">加拿大</div><div class="dden">Canada</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications" class="sec cream" style="text-align:center;">
+  <div class="sh fi">
+    <p class="slabel">Quality Assurance</p>
+    <h2 class="stcn">国际认证</h2>
+    <h3 class="sten">International Certification</h3>
+    <div class="dv"><div class="dvl"></div><div class="dvd"></div><div class="dvl"></div></div>
+  </div>
+  <div class="cgrid">
+    <div class="ci fi d1"><div class="cc"><span class="ca">R·D·S</span></div><div class="cn2">Responsible Down Standard</div></div>
+    <div class="ci fi d2"><div class="cc"><span class="ca">R·W·S</span></div><div class="cn2">Responsible Wool Standard</div></div>
+    <div class="ci fi d3"><div class="cc"><span class="ca" style="font-size:10px;">ORGANIC</span><span class="cs">100</span></div><div class="cn2">Organic 100 Content Standard</div></div>
+    <div class="ci fi d4"><div class="cc"><span class="cs">ISO</span></div><div class="cn2">ISO International Standard</div></div>
+    <div class="ci fi d1"><div class="cc"><span class="ca">ISO</span><span class="cs">9001</span></div><div class="cn2">ISO 9001 Quality Management</div></div>
+    <div class="ci fi d2"><div class="cc"><span class="ca">ISO</span><span class="cs">14001</span></div><div class="cn2">ISO 14001 Environmental</div></div>
+    <div class="ci fi d3"><div class="cc"><span class="cs">BSCI</span></div><div class="cn2">Business Social Compliance Initiative</div></div>
+    <div class="ci fi d4"><div class="cc"><span class="ca" style="font-size:11px;">SMETA</span></div><div class="cn2">SMETA Sedex Audit</div></div>
+    <div class="ci fi d1"><div class="cc"><span class="ca" style="font-size:9px;line-height:1.4;letter-spacing:.5px;text-align:center;">Global<br>Recycled</span></div><div class="cn2">Global Recycled Standard</div></div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section id="partners" class="sec white" style="text-align:center;">
+  <div class="sh fi">
+    <p class="slabel">Collaborations</p>
+    <h2 class="stcn">合作夥伴</h2>
+    <h3 class="sten">Business Partners</h3>
+    <div class="dv"><div class="dvl"></div><div class="dvd"></div><div class="dvl"></div></div>
+  </div>
+  <div class="pgrid2">
+    <div class="pcircle pmm fi"><span class="pn">Max Mara</span></div>
+    <div class="pcircle fi"><span class="pn">Karl Lagerfeld</span></div>
+    <div class="pcircle fi"><span class="pn">Hobbs London</span></div>
+    <div class="pcircle fi"><span class="pn">Madeleine</span></div>
+    <div class="pcircle fi"><span class="pn">Holland Cooper</span></div>
+    <div class="pcircle fi"><span class="pn">Frame</span></div>
+    <div class="pcircle fi"><span class="pn">Country Road</span></div>
+    <div class="pcircle fi"><span class="pn">Mackage</span></div>
+    <div class="pcircle fi"><span class="pn">Nautica</span></div>
+    <div class="pcircle fi"><span class="pn">Peter Hahn</span></div>
+    <div class="pcircle pdark fi"><span class="pn">Pinko</span></div>
+    <div class="pcircle fi"><span class="pn">Elisabetta Franchi</span></div>
+    <div class="pcircle fi"><span class="pn">macron</span></div>
+    <div class="pcircle fi"><span class="pn">Moose Knuckles</span></div>
+    <div class="pcircle pdark fi"><span class="pn">Bosideng</span></div>
+    <div class="pcircle fi"><span class="pn">23区</span></div>
+    <div class="pcircle fi"><span class="pn">Theory Luxe</span></div>
+    <div class="pcircle fi"><span class="pn">Joseph</span></div>
+    <div class="pcircle fi"><span class="pn">自由区</span></div>
+    <div class="pcircle fi"><span class="pn">i c b</span></div>
+    <div class="pcircle fi"><span class="pn">Paul Smith</span></div>
+    <div class="pcircle fi"><span class="pn">波司登</span></div>
+    <div class="pcircle pdark fi"><span class="pn">Evisu</span></div>
+    <div class="pcircle fi"><span class="pn">Elegant Prosper</span></div>
+    <div class="pcircle pdark fi"><span class="pn">I.T</span></div>
+    <div class="pcircle pblue fi"><span class="pn">Ships</span></div>
+    <div class="pcircle fi"><span class="pn">Onward</span></div>
+    <div class="pcircle fi"><span class="pn">New Yorker</span></div>
+    <div class="pcircle fi"><span class="pn">Lancy</span></div>
+    <div class="pcircle fi"><span class="pn">Spyder</span></div>
+    <div class="pcircle pred fi"><span class="pn">EP Yaying</span></div>
+    <div class="pcircle fi"><span class="pn">Lafuma</span></div>
+    <div class="pcircle pdark fi"><span class="pn">IMM</span></div>
+    <div class="pcircle fi"><span class="pn">伊英斯</span></div>
+    <div class="pcircle fi"><span class="pn">Hazzys</span></div>
+  </div>
+</section>
+
+<footer>
+  <div class="ftop">
+    <div class="fbrand">
+      <div class="flogo">DISHANG</div>
+      <div class="flogocn">大连迪尚华盛时装有限公司</div>
+      <p>以高端时装制造为核心，集研发、生产、贸易于一体，为全球客户提供高品质服装解决方案。</p>
+    </div>
+    <div class="fcol">
+      <h4>Company</h4>
+      <ul>
+        <li>公司简介 / About</li>
+        <li>产品系列 / Products</li>
+        <li>生产车间 / Workshops</li>
+        <li>全球布局 / Global</li>
+        <li>国际认证 / Certifications</li>
+        <li>合作伙伴 / Partners</li>
+      </ul>
+    </div>
+    <div class="fcol">
+      <h4>Global Network</h4>
+      <ul>
+        <li>UK — Design Office</li>
+        <li>Spain — Design Office</li>
+        <li>Canada — Design Office</li>
+        <li>Myanmar — Production</li>
+        <li>Bangladesh — Production</li>
+        <li>Cambodia — Production</li>
+      </ul>
+    </div>
+  </div>
+  <div class="fhr"></div>
+  <div class="fbot">
+    <span>© 2024 大连迪尚华盛时装有限公司 · Dalian Dishang Huasheng Fashion Co., Ltd. All rights reserved.</span>
+    <span class="fgold">DISHANG HUASHENG</span>
+  </div>
+</footer>
+
+<script>
+const obs=new IntersectionObserver(e=>{
+  e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in');});
+},{threshold:.08});
+document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').style.boxShadow=window.scrollY>40?'0 1px 18px rgba(0,0,0,0.08)':'none';
+});
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t)t.scrollIntoView({behavior:'smooth'});
+  });
+});
+</script>
