@@ -877,16 +877,36 @@ const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.targe
 document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
 document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth'});});});
 
-<script type="module">
-import LiquidBackground from 'https://cdn.jsdelivr.net/npm/threejs-components@0.0.30/build/backgrounds/liquid1.min.js';
-const canvas=document.getElementById('mosaicCanvas');
-const app=LiquidBackground(canvas);
-app.loadImage('https://i.ibb.co/4R6QMjzw/1fc166ee-5414-11f1-b180-32122d3eb903.jpg');
-app.liquidPlane.material.metalness=0.2;
-app.liquidPlane.material.roughness=0.5;
-app.liquidPlane.uniforms.displacementScale.value=1.8;
-canvas.addEventListener('mousemove',()=>{document.getElementById('liquidHint').style.opacity='0';},{once:true});
-</script>
+/* ═══ LIQUID GLASS — threejs-components LiquidBackground ═══ */
+(function(){
+  const wrap = document.getElementById('mosaicWrap');
+  const hint = document.getElementById('liquidHint');
+
+  const script = document.createElement('script');
+  script.type = 'module';
+  script.textContent = `
+    import LiquidBackground from 'https://cdn.jsdelivr.net/npm/threejs-components@0.0.30/build/backgrounds/liquid1.min.js';
+    const canvas = document.getElementById('mosaicCanvas');
+    if (!canvas) return;
+    const app = LiquidBackground(canvas);
+    app.loadImage('https://i.ibb.co/4R6QMjzw/1fc166ee-5414-11f1-b180-32122d3eb903.jpg');
+    app.liquidPlane.material.metalness = 0.22;
+    app.liquidPlane.material.roughness = 0.52;
+    app.liquidPlane.uniforms.displacementScale.value = 1.6;
+    app.setRain(false);
+    const hint = document.getElementById('liquidHint');
+    let hintFaded = false;
+    canvas.addEventListener('mousemove', () => {
+      if (!hintFaded) { hint.style.opacity = '0'; hintFaded = true; }
+    }, { once: true });
+    canvas.addEventListener('touchstart', () => {
+      if (!hintFaded) { hint.style.opacity = '0'; hintFaded = true; }
+    }, { once: true });
+    window.__liquidApp = app;
+  `;
+  document.body.appendChild(script);
+})();
+
 /* ── View Toggle Logic ── */
 (function(){
   const btn=document.getElementById('viewToggle');
