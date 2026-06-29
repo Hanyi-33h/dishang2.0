@@ -84,8 +84,29 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Hiragino Sans','No
 .liquid-hint{position:absolute;bottom:32px;left:0;right:0;text-align:center;font-size:var(--f-min);letter-spacing:5px;color:rgba(255,255,255,.28);text-transform:uppercase;pointer-events:none;transition:opacity .8s;}
 
 /* RIGHT: content panel */
-.hero-rp{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:flex-end;text-align:right;padding:80px 60px 80px 40px;position:relative;z-index:2;}
-.hero-rp::before{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(255,255,255,.02) 0%,rgba(255,255,255,.05) 100%);border-left:.5px solid rgba(255,255,255,.1);pointer-events:none;}
+.hero-rp{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:flex-end;text-align:right;padding:80px 60px 80px 40px;position:relative;z-index:2;background:transparent;}
+/* 渐变动画背景层 */
+.hero-rp-bg{position:absolute;inset:0;overflow:hidden;z-index:0;}
+.hero-rp-bg iframe{
+  position:absolute;
+  /* 放大 iframe 并居中，裁掉顶部工具栏和底部文字 */
+  top:-80px;left:-10px;right:-10px;bottom:-60px;
+  width:calc(100% + 20px);height:calc(100% + 140px);
+  border:none;pointer-events:none;
+}
+/* 遮罩：顶部遮住工具栏，底部遮住文字，保留中间动态部分 */
+.hero-rp-mask{position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(to bottom,
+      #112255 0px,
+      #112255 72px,
+      transparent 110px,
+      transparent calc(100% - 48px),
+      #1a3a6e 100%
+    );
+}
+.hero-rp::before{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(255,255,255,.02) 0%,rgba(255,255,255,.05) 100%);border-left:.5px solid rgba(255,255,255,.1);pointer-events:none;z-index:1;}
+.hero-rp > *:not(.hero-rp-bg){position:relative;z-index:2;}
 .h-eye{font-size:var(--f-min);letter-spacing:8px;color:var(--gold);text-transform:uppercase;margin-bottom:20px;opacity:0;animation:fadeUp .7s .3s forwards;position:relative;}
 .h-bigcn{font-family:Georgia,serif;font-size:clamp(32px,4.2vw,62px);font-weight:400;color:#fff;line-height:1.05;letter-spacing:3px;margin-bottom:8px;opacity:0;animation:fadeUp .7s .45s forwards;text-shadow:0 2px 30px rgba(0,0,0,.3);position:relative;}
 .h-bigen{font-family:Georgia,serif;font-size:clamp(13px,1.6vw,20px);font-weight:400;color:rgba(255,255,255,.4);letter-spacing:7px;margin-bottom:30px;opacity:0;animation:fadeUp .7s .55s forwards;font-style:italic;position:relative;}
@@ -549,13 +570,17 @@ body.force-mobile .h-scroll-hint{display:none!important;}
 <!-- HERO -->
 <section id="hero">
   <div class="mosaic-wrap" id="mosaicWrap">
-    <iframe
-      src="https://gradients.juangarcia.ch/?c1=8ECAE6&c2=39BCDB&c3=023047&c4=FFB703&c5=FB8500"
-      style="position:absolute;inset:0;width:100%;height:100%;border:none;display:block;"
-      scrolling="no" allowtransparency="true" tabindex="-1" aria-hidden="true"
-    ></iframe>
+    <canvas id="mosaicCanvas"></canvas>
+    <div class="liquid-hint" id="liquidHint">~ 轻触以激活水波 ~</div>
   </div>
   <div class="hero-rp">
+    <div class="hero-rp-bg">
+      <iframe
+        src="https://gradients.juangarcia.ch/?c1=8ECAE6&c2=39BCDB&c3=023047&c4=FFB703&c5=FB8500"
+        scrolling="no" tabindex="-1" aria-hidden="true"
+      ></iframe>
+      <div class="hero-rp-mask"></div>
+    </div>
     <p class="h-eye" id="hEye">迪尚集团 · 高端时装制造</p>
     <h1 class="h-bigcn" id="hBigCn">大连迪尚<br>華盛時裝</h1>
     <p class="h-bigen" id="hBigEn">DISHANG HUASHENG</p>
